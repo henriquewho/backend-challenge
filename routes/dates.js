@@ -1,5 +1,5 @@
 const datesRouter = require('express').Router();  
-const {getDates, getAllDates, getDates2} = require('../controllers/dates'); 
+const {getDates} = require('../controllers/dates'); 
 
 datesRouter.get('/', getDates);
 
