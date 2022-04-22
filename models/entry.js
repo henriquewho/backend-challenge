@@ -17,4 +17,4 @@ entrySchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('Entry', itemSchema)
+module.exports = mongoose.model('Entry', entrySchema)

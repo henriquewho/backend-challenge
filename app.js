@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const config = require('./utils/config')
+const datesRouter = require('./routes/dates'); 
 
 mongoose.connect(config.MONGODB_URI)
 .then(()=>{
@@ -16,8 +17,10 @@ mongoose.connect(config.MONGODB_URI)
 app.use(cors());
 app.use(express.json());
 
+app.use('/dates', datesRouter); 
+
 app.get('/testenv', (req, res)=>{
-    res.end(`TEST! -> ${process.env.NODE_ENV}`);
+    res.end(`TEST... -> ${process.env.NODE_ENV}`);
 })
 
 module.exports = app; 
