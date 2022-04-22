@@ -1,9 +1,18 @@
 const Entry = require('../models/entry');
-const mongoose = require('mongoose'); 
 
 const getDates = async (req, res) => {
-    let entries = await Entry.find({}); 
-    return res.end(`Number of entries: ${entries.length}` ); 
+    try {
+        const  distinctDates = await Entry.distinct('date');
+        return res.status(200).json({
+            success: true, data: distinctDates
+        })
+    } catch (err) {
+        console.log(`error while getDates: ${err}`); 
+        return res.json({
+            success: false, msg: `Error while querying for distinct dates`
+        })
+    }
+    
 }
 
 module.exports = {
