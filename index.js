@@ -1,11 +1,10 @@
-const express = require('express'); 
-const app = express(); 
+const http = require('http'); 
+const app = require('./app');
 
-app.get('/', (req, res)=>{
-    res.end(`TESTs -> ${process.env.NODE_ENV}`);
-})
+const server = http.createServer(app); 
 
 const PORT = process.env.PORT || 3003; 
-app.listen(PORT, ()=>{
+
+server.listen(PORT, ()=>{
     console.log(`Listening at ${PORT}`);
 })
