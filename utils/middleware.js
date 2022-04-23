@@ -42,6 +42,10 @@ const checkDate = (req, res, next) => {
     }
 }
 
+const unknownEndpoint = (req, res) => {
+    return res.status(404).send(`There's no API endpoint at ${req.path}, please try another address`);
+}
+
 module.exports = {
-    checkDate
+    checkDate, unknownEndpoint
 }

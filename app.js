@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const config = require('./utils/config')
 const datesRouter = require('./routes/dates');
 const casesRouter = require('./routes/cases');
+const middleware = require('./utils/middleware');
 
 mongoose.connect(config.MONGODB_URI)
 .then(()=>{
@@ -21,8 +22,10 @@ app.use(express.json());
 app.use('/dates', datesRouter); 
 app.use('/cases', casesRouter); 
 
-app.get('/testenv', (req, res)=>{
-    res.end(`TEST... -> ${process.env.NODE_ENV}`);
+app.get('/', (req, res)=>{
+    res.send(`Backend Challenge 2021 🏅- Covid Daily Cases`);
 })
+
+app.use(middleware.unknownEndpoint);
 
 module.exports = app; 
