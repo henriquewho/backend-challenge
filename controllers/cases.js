@@ -19,6 +19,12 @@ const getCasesByDay = async (req, res) => {
                 }
             }
         })
+
+        if (entries.length === 0) {
+            return res.status(200).json({
+                success: true, msg: `There was no data for the date ${req.date}`
+            })
+        }
     
         return res.status(200).json({
             success: true, data: entries
@@ -60,6 +66,12 @@ const getCumulativeCases = async (req, res) => {
                 }
             }
         })
+
+        if (entries.length === 0) {
+            return res.status(200).json({
+                success: true, msg: `There was no data for the date ${req.date}`
+            })
+        }
 
         return res.status(200).json({
             success: true, data: entries

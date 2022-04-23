@@ -7,7 +7,7 @@ the database
 */
 
 const checkBounds = (month, day, res, date) => {
-    return (+month > 12 || +day > 31) ? 'invalid' : 'valid'; 
+    return (+month > 12 || +day > 31 || +month==0 || +day===0) ? 'invalid' : 'valid'; 
 }
 
 const checkDate = (req, res, next) => {
@@ -20,7 +20,7 @@ const checkDate = (req, res, next) => {
             req.date = date; 
         } else {
             return res.status(400).json({
-                success: false, msg: `The date parameter ${date} is invalid, please try again. The month should be lower than 13 and the day lower than 32.`
+                success: false, msg: `The date parameter ${date} is invalid, please try again. The month should be between 1 and 12 and the day between 1 and 31.`
             })
         }
         next(); 
@@ -30,7 +30,7 @@ const checkDate = (req, res, next) => {
             req.date = newDate; 
         } else {
             return res.status(400).json({
-                success: false, msg: `The date parameter ${date} is invalid, please try again. The month should be lower than 13 and the day lower than 32.`
+                success: false, msg: `The date parameter ${date} is invalid, please try again. The month should be between 1 and 12 and the day between 1 and 31.`
             })
         }
         next(); 
