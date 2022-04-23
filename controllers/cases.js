@@ -9,23 +9,34 @@ const Entry = require('../models/entry');
 const getCasesByDay = async (req, res) => {
     const filter = {date: new Date(req.date)}; 
 
-    const entries = await Entry.aggregate()
-    .match(filter)
-    .group({"_id": {
-        "location": "$location", 
-        "variant": "$variant", 
-        "num_sequences": "$num_sequences"
-    }})
-    .group({
-        "_id": "$_id.location", 
-        "variants": {
-            "$push": {
-                    "variant": "$_id.variant", "num": "$_id.num_sequences"
+    try {
+        const entries = await Entry.aggregate()
+        .match(filter)
+        .group({"_id": {
+            "location": "$location", 
+            "variant": "$variant", 
+            "num_sequences": "$num_sequences"
+        }})
+        .group({
+            "_id": "$_id.location", 
+            "variants": {
+                "$push": {
+                        "variant": "$_id.variant", "num": "$_id.num_sequences"
+                }
             }
-        }
-    })
+        })
+    
+        return res.status(200).json({
+            success: true, data: entries
+        })
 
-    res.json(entries)
+    } catch (err) {
+        return res.status(500).json({
+            success: false, msg: `Error while querying for cases in the date`, err
+        })
+    }
+
+
 }
 
 const getCumulativeCases = (req, res) => {
