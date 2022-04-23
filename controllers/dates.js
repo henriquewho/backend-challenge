@@ -7,12 +7,10 @@ const getDates = async (req, res) => {
             success: true, data: distinctDates
         })
     } catch (err) {
-        console.log(`error while getDates: ${err}`); 
-        return res.json({
-            success: false, msg: `Error while querying for distinct dates`
+        return res.status(500).json({
+            success: false, msg: `Error while querying for distinct dates`, err
         })
     }
-    
 }
 
 module.exports = {
