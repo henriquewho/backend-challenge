@@ -40,9 +40,8 @@ const getCasesByDay = async (req, res) => {
 }
 
 const getCumulativeCases = (req, res) => {
-    const date = req.params.date; 
-    console.log(date); 
-    res.end('getCumulativeCases')
+    const date = req.date;
+    res.end(`gCd, ${date}`)
 }
 
 module.exports = {
