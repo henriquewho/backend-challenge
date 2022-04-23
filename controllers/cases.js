@@ -1,9 +1,3 @@
-/* 
-GET]/cases/:date/count: Listar todos os registros da base de dados no dia selecionado, agrupados por país e separados por variante.
-
-[GET]/cases/:date/cumulative: Listar todos os registros da base de dados, retornando a soma dos casos registrados de acordo com a data selecionada, agrupados por país e separados por variante.
-*/
-
 const Entry = require('../models/entry');
 
 const getCasesByDay = async (req, res) => {
@@ -21,7 +15,7 @@ const getCasesByDay = async (req, res) => {
             "_id": "$_id.location", 
             "variants": {
                 "$push": {
-                        "variant": "$_id.variant", "num": "$_id.num_sequences"
+                        "variant": "$_id.variant", "total": "$_id.num_sequences"
                 }
             }
         })
@@ -32,16 +26,50 @@ const getCasesByDay = async (req, res) => {
 
     } catch (err) {
         return res.status(500).json({
-            success: false, msg: `Error while querying for cases in the date`, err
+            success: false, msg: `Error while querying for cases in the date ${req.date}`, err
         })
     }
 
 
 }
 
-const getCumulativeCases = (req, res) => {
-    const date = req.date;
-    res.end(`gCd, ${date}`)
+const getCumulativeCases = async (req, res) => {
+    const nextDate = new Date(req.date);
+    nextDate.setDate(nextDate.getDate()+1); 
+    const filter = {"date": {"$gte": new Date(2019, 0, 1), "$lt": nextDate}};
+
+    try {
+        const entries = await Entry.aggregate()
+        .match(filter)
+        .group(
+            {"_id": 
+            {
+                "location": "$location", 
+                "variant": "$variant"
+            }, 
+            count: {
+                "$sum": "$num_sequences"
+            }
+        })
+        .group({
+            "_id": "$_id.location", 
+            "variants": {
+                "$push": {
+                    "variant": "$_id.variant", 
+                    "total": "$count"
+                }
+            }
+        })
+
+        return res.status(200).json({
+            success: true, data: entries
+        })
+
+    } catch(err) {
+        return res.status(500).json({
+            success: false, msg: `Error while querying for cumulative cases in the date ${req.date}`, err
+        })
+    }
 }
 
 module.exports = {
