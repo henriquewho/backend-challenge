@@ -12,8 +12,9 @@ const checkDate = (req, res, next) => {
         next(); 
     }
     else {
-        req.date = 'invalid'; 
-        next(); 
+        return res.status(400).json({
+            success: false, msg: `The date parameter ${date} is invalid, please try again`
+        })
     }
 }
 
