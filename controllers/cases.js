@@ -3,6 +3,11 @@ const Entry = require('../models/entry');
 const cumulativeCache = new Map(); 
 const counterCache = new Map();
 
+const changeStream = Entry.watch().on('change', change => {
+    cumulativeCache.clear(); 
+    counterCache.clear(); 
+})
+
 const getCasesByDay = async (req, res) => {
     const filter = {date: new Date(req.date)}; 
 
