@@ -32,7 +32,7 @@ Alternativamente, pode-se rodar o aplicativo com:
 
 > npm run dev
 
-## Link demo
+## Link heroku para a API
 [Heroku - Coodesh Covid](https://coodesh-covid.herokuapp.com/)
 
 ## Apresentação
