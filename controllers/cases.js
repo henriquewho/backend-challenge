@@ -27,15 +27,15 @@ const getCasesByDay = async (req, res) => {
                     }
                 }
             })
-
-            counterCache.set(req.date, entries);
-            setTimeout(()=>counterCache.delete(req.date), 120*1000);
     
             if (entries.length === 0) {
                 return res.status(200).json({
                     success: true, msg: `There was no data for the date ${req.date}`
                 })
             }
+
+            counterCache.set(req.date, entries);
+            setTimeout(()=>counterCache.delete(req.date), 120*1000);
         
             return res.status(200).json({
                 success: true, data: entries
@@ -82,15 +82,15 @@ const getCumulativeCases = async (req, res) => {
                     }
                 }
             })
-
-            cumulativeCache.set(req.date, entries);
-            setTimeout(()=>cumulativeCache.delete(req.date), 120*1000);
     
             if (entries.length === 0) {
                 return res.status(200).json({
                     success: true, msg: `There was no data for the date ${req.date}`
                 })
             }
+
+            cumulativeCache.set(req.date, entries);
+            setTimeout(()=>cumulativeCache.delete(req.date), 120*1000);
     
             return res.status(200).json({
                 success: true, data: entries
