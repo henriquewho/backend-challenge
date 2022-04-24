@@ -6,7 +6,7 @@ _Geraldo Henrique G. Fonseca_
 Este projeto proposto pela Coodesh consiste em uma API REST sobre casos registrados de COVID-19, que tem como 3 endpoints principais: 
 - /dates, que retorna uma lista de datas no dataset 
 - /cases/:date/counter, que retorna a contagem diária de casos por país
-- /cases/:date/cumulative, que retorna a contagem diária de casos por país cumulativamente, até determinada nada
+- /cases/:date/cumulative, que retorna a contagem de casos por país cumulativamente, até determinada nada
 
 ## Tecnologias utilizadas 
 
@@ -28,7 +28,8 @@ O projeto pode ser então instalado para testes via docker, usando o comando:
 > docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
 Alternativamente, pode-se rodar o aplicativo com: 
-> npm install 
+> npm install   
+
 > npm run dev
 
 ## Link demo
