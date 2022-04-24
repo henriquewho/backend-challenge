@@ -33,7 +33,7 @@ Alternativamente, pode-se rodar o aplicativo com:
 > npm run dev
 
 ## Link demo
-[Heroku - Coodesh Covi](http://coodesh-covid.herokuapp.com/)
+[Heroku - Coodesh Covid](https://coodesh-covid.herokuapp.com/)
 
 ## Apresentação
 [Link para a apresentação](http://coodesh-covid.herokuapp.com/)
