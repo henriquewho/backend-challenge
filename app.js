@@ -7,6 +7,8 @@ const config = require('./utils/config')
 const datesRouter = require('./routes/dates');
 const casesRouter = require('./routes/cases');
 const middleware = require('./utils/middleware');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 mongoose.connect(config.MONGODB_URI)
 .then(()=>{
@@ -16,6 +18,23 @@ mongoose.connect(config.MONGODB_URI)
     console.log('error connecting: ', err.message);
 })
 
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'COVID cases REST API', 
+            desription: 'REST API that returns information about COVID CASES, for the Coodesh Backend Challenge', 
+            contact: {
+                name: 'Geraldo Henrique G. Fonseca'
+            }, 
+            servers: ["http://localhost:3003"]
+        }
+    }, 
+    apis: ["./routes/*.js"]
+}
+const swaggerDocs = swaggerJsDoc(swaggerOptions)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(cors());
 app.use(express.json());
 

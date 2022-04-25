@@ -12,6 +12,7 @@ Este projeto proposto pela Coodesh consiste em uma API REST sobre casos registra
 
 - O projeto foi desenvolvido em NodeJS
 - Tecnologias auxiliares: Docker, Mongo/Mongoose, Jest
+- Documentação feita com Swagger (Open API)
 
 ## Criação do banco de dados 
 
@@ -31,6 +32,11 @@ Alternativamente, pode-se rodar o aplicativo com:
 > npm install   
 
 > npm run dev
+
+## Documentação
+
+A documentação foi feita utilizando Swagger, com add-on de interface para visualização.
+Para a interface da documentação, acessar [https://localhost:3003/api-docs/](https://localhost:3003/api-docs/) enquanto rodar o aplicativo localmente ou [https://coodesh-covid.herokuapp.com/api-docs](https://coodesh-covid.herokuapp.com/api-docs) para a versão demo / online. 
 
 ## Link heroku para a API
 [Heroku - Coodesh Covid](https://coodesh-covid.herokuapp.com/)
