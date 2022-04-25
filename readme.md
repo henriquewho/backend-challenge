@@ -42,4 +42,4 @@ Para a interface da documentação, acessar [https://localhost:3003/api-docs/](h
 [Heroku - Coodesh Covid](https://coodesh-covid.herokuapp.com/)
 
 ## Apresentação
-[Link para a apresentação](http://coodesh-covid.herokuapp.com/)
+[Link para a apresentação](https://www.loom.com/embed/7d6aa39e185040d29202fd384c58ec63/)
